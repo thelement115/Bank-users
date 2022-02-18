@@ -2,8 +2,10 @@ package com.vobi.bank.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.vobi.bank.domain.Customer;
 import com.vobi.bank.domain.UserType;
 import com.vobi.bank.domain.Users;
 
@@ -85,4 +87,22 @@ class UserRepositoryIT {
 		//Assert
 		assertFalse(userOptional.isPresent(), "el usuario no fue borrado");
 	}
+	
+	@Test
+	@Order(5)
+	void debeConsultarTodosLosUsuarios() {
+	 //Arrange	
+	 List<Users> users = null;
+	 //Act
+	 
+	 users=userRepository.findAll();
+	 for (Users user : users) {
+		 log.info(user.getName());
+	 }
+	 
+	 //Assert
+	 
+	 assertFalse(users.isEmpty(), "No consulto Customers");
+	}
+
 }

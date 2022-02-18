@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService{
 		validate(entity);
 		
 		if(usersRepository.existsById(entity.getUserEmail())) {
-			throw new Exception("El cliente ya existe");
+			throw new Exception("El usuario ya existe");
 		}
 		
 		return usersRepository.save(entity);
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService{
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public Users update(Users entity) throws Exception {
 		if(entity==null) {
-			throw new Exception("El customer es nulo");
+			throw new Exception("El usuario es nulo");
 		}
 		
 		validate(entity);
@@ -81,15 +81,15 @@ public class UserServiceImpl implements UserService{
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void delete(Users entity) throws Exception {
 		if(entity==null) {
-			throw new Exception("El customer es nulo");
+			throw new Exception("El usuario es nulo");
 		}
 		
 		if(entity.getUserEmail() == null) {
-			throw new Exception("El customer id es nulo");
+			throw new Exception("El usuario id es nulo");
 		}
 		
 		if(usersRepository.existsById(entity.getUserEmail()) == false) {
-			throw new Exception("El customer no existe");
+			throw new Exception("El usuario no existe");
 		}
 		
 		usersRepository.deleteById(entity.getUserEmail());
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		if (!usersRepository.existsById(id)) {
-			throw new Exception("El customer no existe");
+			throw new Exception("El usuario no existe");
 		}
 		
 		delete(usersRepository.findById(id).get());

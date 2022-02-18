@@ -2,6 +2,7 @@ package com.vobi.bank.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Order;
@@ -58,7 +59,7 @@ class UsersServiceIT {
 		//Act
 		user =usersService.save(user);
 		//Assert
-		assertNotNull(user,"El customer es nulo no se pudo grabar");
+		assertNotNull(user,"El usuario es nulo no se pudo grabar");
 	}
 	
 	@Test
@@ -91,6 +92,23 @@ class UsersServiceIT {
 
 		//Assert
 		assertFalse(userOptional.isPresent(), "el usuario no fue borrado");
+	}
+
+	@Test
+	@Order(5)
+	void debeConsultarTodosLosUsuarios() {
+	 //Arrange	
+	 List<Users> users = null;
+	 //Act
+	 
+	 users=usersService.findAll();
+	 for (Users user : users) {
+		 log.info(user.getName());
+	 }
+	 
+	 //Assert
+	 
+	 assertFalse(users.isEmpty(), "No consulto usuario");
 	}
 
 }
